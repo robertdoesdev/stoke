@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stoke</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- navigation bar for landig page -->
+  <header id="app-header" class="hidden">
+    <div class="logo">
+      <span class="flame"></span>
+      <span class="brand-name">STOKE</span>
+    </div>
+    <nav id="main-nav">
+      <button class="nav-btn active" data-target="screen-home"><span></span> Home</button>
+      <button class="nav-btn" data-target="screen-history"><span></span> History</button>
+      <button class="nav-btn" data-target="screen-ideas"><span></span> Ideas</button>
+      <button class="nav-btn" data-target="screen-insights"><span></span> Insights</button>
+      <button class="nav-btn" data-target="screen-profile"><span></span> Profile</button>
+    </nav>
+    <div class="user-meta">
+      <span id="nav-username">vermin</span>
+      <button id="btn-logout" class="logout-link">➔ Log out</button>
+    </div>
+  </header>
+
+  <main id="app-viewport">
+
+    <!--landing page -->
+    <section id="screen-landing" class="screen active">
+      <div class="panel panel-main">
+        <div class="kicker"><span class="flame"></span> FOR DEVELOPERS WHO DON'T KNOW WHAT TO BUILD NEXT</div>
+        <h1 class="display-title">Stoke studies your skill and chooses one project you should build.</h1>
+        <p class="body-lead">Not fifty ideas. one recommendation, sized to your skills, your time, and what you're actually trying to get out of it. Then a workspace to build it, and a memory that gets sharper every time.</p>
+        
+        <div class="btn-group">
+          <button class="btn btn-primary" onclick="navigateTo('screen-signup')">Get Started</button>
+          <button class="btn btn-dark" onclick="navigateTo('screen-login')">Log In</button>
+        </div>
+
+        <div class="section-label">HOW IT WORKS</div>
+        <div class="grid grid-4">
+          <div class="mini-card">
+            <span class="icon">🔨</span>
+            <div class="card-title">MACHINE</div>
+            <div class="card-desc">Figures out what you should build</div>
+          </div>
+          <div class="mini-card">
+            <span class="icon">🛠️</span>
+            <div class="card-title">WORKSPACE</div>
+            <div class="card-desc">Helps you actually build it</div>
+          </div>
+          <div class="mini-card">
+            <span class="icon">📈</span>
+            <div class="card-title">MEMORY</div>
+            <div class="card-desc">Learns how you build</div>
+          </div>
+          <div class="mini-card">
+            <span class="icon">📦</span>
+            <div class="card-title">HISTORY</div>
+            <div class="card-desc">Tracks everything you've shipped</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!--sign up -->
+    <section id="screen-signup" class="screen">
+      <div class="panel panel-narrow center-panel">
+        <div class="kicker">CREATE ACCOUNT</div>
+        <h1 class="panel-title">Set up your build profile.</h1>
+        <p class="body-sub">Prototype note: this is a simulated login for demo purposes, stored in local storage. don't reuse a real password.</p>
+
+        <form id="signup-form">
+          <div class="form-group">
+            <label>Username</label>
+            <input type="text" id="signup-user" required placeholder="e.g. vermin">
+          </div>
+          <div class="form-group">
+            <label>Password</label>
+            <input type="password" id="signup-pass" required>
+          </div>
+          <div class="form-group">
+            <label>Confirm password</label>
+            <input type="password" id="signup-pass-confirm" required>
+          </div>
+          <button type="submit" class="btn btn-dark btn-full mb-3">Create Account</button>
+        </form>
+        <div class="text-center">
+          <a href="#" class="muted-link" onclick="navigateTo('screen-login')">Already have an account? Log in</a>
+        </div>
+      </div>
+    </section>
+
+    <!--login-->
+    <section id="screen-login" class="screen">
+      <div class="panel panel-narrow center-panel">
+        <div class="kicker">LOG IN</div>
+        <h1 class="panel-title">Welcome back.</h1>
+
+        <form id="login-form">
+          <div class="form-group">
+            <label>Username</label>
+            <input type="text" id="login-user" required placeholder="vermin">
+          </div>
+          <div class="form-group">
+            <label>Password</label>
+            <input type="password" id="login-pass" required>
+          </div>
+          <button type="submit" class="btn btn-dark btn-full mb-3">Log In ➔</button>
+        </form>
+        <div class="text-center">
+          <a href="#" class="muted-link" onclick="navigateTo('screen-signup')">Don't have an account? Sign up</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- dashboard -->
+    <section id="screen-home" class="screen">
+      <div class="panel panel-main">
+        <div class="kicker">HOME</div>
+        <h1 class="panel-title">What should you build next?</h1>
+        <p class="body-lead">The Machine, the Workspace, your Memory, and your History. All in one place.</p>
+
+        <div class="btn-group">
+          <button class="btn btn-primary" onclick="navigateTo('screen-onboarding')">Start New Build</button>
+          <button class="btn btn-dark" onclick="navigateTo('screen-onboarding')">Give Me My Next Build</button>
+        </div>
+
+        <div class="section-label mt-4">SNAPSHOT</div>
+        <div class="grid grid-3">
+          <div class="stat-card">
+            <div class="stat-num" id="stat-finished">0</div>
+            <div class="stat-lbl">Finished</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-num" id="stat-graveyard">0</div>
+            <div class="stat-lbl">Graveyard</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-num" id="stat-ideas">0</div>
+            <div class="stat-lbl">Saved ideas</div>
+          </div>
+        </div>
+
+        <div class="section-label mt-4">STOKE IS NOTICING</div>
+        <p id="patterns-notice-text" class="notice-text">No build history yet. finish or abandon a project and STOKE will start spotting patterns.</p>
+      </div>
+    </section>
+
+    <!-- profile form -->
+    <section id="screen-onboarding" class="screen">
+      <div class="panel panel-main">
+        <div class="kicker">BUILD PROFILE</div>
+        <h1 class="panel-title">Tell STOKE what you're working with.</h1>
+        <p class="body-sub mb-4">No wishlists of ideas, just the constraints. The Machine does the choosing.</p>
+
+        <form id="build-profile-form">
+          
+          <div class="form-step">
+            <label class="step-label"><span class="step-num">01</span> What can you already build with?</label>
+            <p class="step-hint">Languages, frameworks, tools. Press Enter after each.</p>
+            <input type="text" id="input-existing-skills" placeholder="e.g. JavaScript, React, Postgres">
+          </div>
+
+          <div class="form-step">
+            <label class="step-label"><span class="step-num">02</span> Experience level</label>
+            <div class="pill-group" data-single="true" id="pill-exp">
+              <button type="button" class="pill">Beginner</button>
+              <button type="button" class="pill active">Intermediate</button>
+              <button type="button" class="pill">Advanced</button>
+            </div>
+          </div>
+
+          <div class="form-step">
+            <label class="step-label"><span class="step-num">03</span> Time you can put toward this</label>
+            <div class="pill-group" data-single="true" id="pill-time">
+              <button type="button" class="pill">Under 5 hrs</button>
+              <button type="button" class="pill active">5–15 hrs</button>
+              <button type="button" class="pill">15–40 hrs</button>
+              <button type="button" class="pill">40+ hrs</button>
+            </div>
+          </div>
+
+          <div class="form-step">
+            <label class="step-label"><span class="step-num">04</span> Why are you building right now?</label>
+            <p class="step-hint">Pick as many as apply.</p>
+            <div class="pill-group" id="pill-goals">
+              <button type="button" class="pill active">Learning</button>
+              <button type="button" class="pill">Portfolio</button>
+              <button type="button" class="pill">Fun</button>
+              <button type="button" class="pill">Income</button>
+              <button type="button" class="pill">Solve a problem</button>
+            </div>
+          </div>
+
+          <div class="form-step">
+            <label class="step-label"><span class="step-num">05</span> What kind of project?</label>
+            <div class="pill-group" id="pill-type">
+              <button type="button" class="pill active">Web app</button>
+              <button type="button" class="pill">CLI tool</button>
+              <button type="button" class="pill">Mobile app</button>
+              <button type="button" class="pill">API / backend</button>
+              <button type="button" class="pill">Browser extension</button>
+              <button type="button" class="pill">Game</button>
+              <button type="button" class="pill">Data / ML</button>
+              <button type="button" class="pill">Automation</button>
+              <button type="button" class="pill">No preference</button>
+            </div>
+          </div>
+
+          <div class="form-step">
+            <label class="step-label"><span class="step-num">06</span> Technologies you want to practice</label>
+            <p class="step-hint">Optional. Things you specifically want reps on.</p>
+            <input type="text" id="input-practice-tech" placeholder="e.g. Rust, GraphQL, GO, SQL, React Native">
+          </div>
+
+          <div class="form-step">
+            <label class="step-label"><span class="step-num">07</span> Things you don't want to build</label>
+            <p class="step-hint">Optional. STOKE will avoid these.</p>
+            <input type="text" id="input-avoid" placeholder="e.g. another todo app, weather app">
+          </div>
+
+          <div class="form-step">
+            <label class="step-label"><span class="step-num">08</span> Interests or problems you'd like solved</label>
+            <p class="step-hint">Optional. A sentence or two.</p>
+            <textarea id="input-interests" rows="3" placeholder="e.g. I keep losing track of what I've read online"></textarea>
+          </div>
+
+          <div class="form-step">
+            <label class="step-label"><span class="step-num">09</span> Challenge mode</label>
+            <p class="step-hint">How hard should this push you?</p>
+            <div class="pill-group" data-single="true" id="pill-challenge">
+              <button type="button" class="pill">Easy</button>
+              <button type="button" class="pill active-orange">Normal</button>
+              <button type="button" class="pill">Stretch</button>
+              <button type="button" class="pill">Brutal</button>
+              <button type="button" class="pill">Surprise Me</button>
+            </div>
+          </div>
+
+          <button type="submit" id="btn-ignite" class="btn btn-dark btn-full mt-4">Ignite the Machine ➔</button>
+          <div class="text-center mt-2">
+            <span class="muted-label">Fill in skills, experience, time, and project type to continue.</span>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <!--history -->
+    <section id="screen-history" class="screen">
+      <div class="panel panel-main">
+        <div class="kicker">PROJECT HISTORY</div>
+        <h1 class="panel-title">Everything you've started.</h1>
+        <p class="body-lead" id="history-subtitle">Nothing archived yet. Finish, deploy, or abandon a build and it'll show up here.</p>
+        <div id="history-list" class="grid grid-2 mt-4"></div>
+      </div>
+    </section>
+
+    <!-- ideas -->
+    <section id="screen-ideas" class="screen">
+      <div class="panel panel-main">
+        <div class="kicker">IDEA INBOX</div>
+        <h1 class="panel-title">Random ideas, saved for later.</h1>
+        <p class="body-lead">Drop ideas here whenever they strike. Build one directly, or select two to combine into something new.</p>
+
+        <div class="idea-input-row mt-4">
+          <input type="text" id="input-new-idea" placeholder="e.g. GitHub activity tracker">
+          <button class="btn btn-primary" id="btn-save-idea">+ Save</button>
+        </div>
+
+        <div id="ideas-list-container" class="mt-4">
+          <p class="muted-label">No ideas saved yet.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- insights  -->
+    <section id="screen-insights" class="screen">
+      <div class="panel panel-main">
+        <div class="kicker">INSIGHTS</div>
+        <h1 class="panel-title">What STOKE has learned about you.</h1>
+
+        <div class="section-label mt-4">MEMORY</div>
+        <p class="notice-text">No build history yet. finish or abandon a project and STOKE will start spotting patterns.</p>
+
+        <div class="section-label mt-4">SKILL DEVELOPMENT</div>
+        <div class="grid grid-2">
+          <div>
+            <div class="sub-label">STRONG</div>
+            <p class="muted-label" id="skills-strong-text">Not enough finished projects yet.</p>
+          </div>
+          <div>
+            <div class="sub-label">UNDERUSED</div>
+            <div class="pill-tags mt-2">
+              <span class="tag">Javascript</span>
+              <span class="tag">HTML</span>
+              <span class="tag">CSS</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="section-label mt-4">PORTFOLIO INTELLIGENCE</div>
+        <p class="muted-label">Finish a few projects to see your portfolio shape.</p>
+      </div>
+    </section>
+
+    <!-- profile -->
+    <section id="screen-profile" class="screen">
+      <div class="panel panel-main">
+        <div class="kicker">PROFILE</div>
+        <h1 class="panel-title" id="profile-user-display">vermin</h1>
+        <p class="body-sub mb-4" id="profile-join-date">Member since 30/08/2026</p>
+
+        <div class="grid grid-3">
+          <div class="stat-card">
+            <div class="stat-num" id="prof-stat-shipped">0</div>
+            <div class="stat-lbl">Shipped</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-num" id="prof-stat-started">0</div>
+            <div class="stat-lbl">Started</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-num" id="prof-stat-skills">0</div>
+            <div class="stat-lbl">Skills logged</div>
+          </div>
+        </div>
+
+        <div class="section-label mt-4">PORTFOLIO</div>
+        <p class="muted-label mb-3">Finish or deploy a project and it'll show up here. ready to drop into a resume.</p>
+        <pre id="resume-export-box" class="code-box">No completed builds recorded yet.</pre>
+      </div>
+    </section>
+
+    <!-- workspace -->
+    <section id="screen-workspace" class="screen">
+      <div class="panel panel-main">
+        <div class="workspace-header-bar">
+          <div>
+            <div class="kicker">ACTIVE WORKSPACE</div>
+            <h1 class="panel-title" id="ws-title">No Active Build</h1>
+            <p class="body-sub" id="ws-tagline"></p>
+          </div>
+          <button class="btn btn-danger-outline" id="btn-abandon-build">Abandon Build</button>
+        </div>
+
+        <div class="grid grid-2 mt-4">
+          <div>
+            <div class="section-label">ROADMAP TASKS</div>
+            <div id="ws-tasks-container" class="tasks-container mt-2"></div>
+          </div>
+
+          <div>
+            <div class="section-label">AI ASSISTANT (I'M STUCK)</div>
+            <div class="mini-card mt-2">
+              <div class="form-group mb-2">
+                <label>Current Task</label>
+                <select id="stuck-task-select"></select>
+              </div>
+              <div class="form-group mb-2">
+                <label>Bottleneck Type</label>
+                <select id="stuck-issue-select">
+                  <option value="Architectural Uncertainty">Architectural Uncertainty</option>
+                  <option value="Debugging / Syntax Error">Debugging / Syntax Error</option>
+                  <option value="Scope Creep / Overwhelmed">Scope Creep / Overwhelmed</option>
+                </select>
+              </div>
+              <button class="btn btn-dark btn-full" id="btn-query-ai">Get AI Advice</button>
+              <div id="ai-advice-result" class="advice-output hidden mt-3"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
